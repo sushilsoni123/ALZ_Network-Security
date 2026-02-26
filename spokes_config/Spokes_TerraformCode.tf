@@ -16,17 +16,17 @@ terraform {
 provider "azurerm" {
   # Configuration options
   features {}
- subscription_id = "dbbf834e-d172-43ce-9e9b-e698443b0ce8"    # subscription id where actual config to be done.
+ subscription_id = var.subscription_id    # subscription id where actual config to be done.
 }
 
 resource "azurerm_resource_group" "spoke1_rg" {
   name     = "spoke1_rg"
-  location = "North Europe"
+  location = var.cloud_region
 }
 
 resource "azurerm_virtual_network" "spoke1_vnet" {
   name = "spoke1_vnet"
-  location = "North Europe"
+  location = var.cloud_region
   resource_group_name = azurerm_resource_group.spoke1_rg.name
   address_space = ["10.9.0.0/16"]
 }
@@ -36,21 +36,11 @@ resource "azurerm_subnet" "spoke1_vm_subnet" {
   resource_group_name = azurerm_resource_group.spoke1_rg.name
   virtual_network_name = azurerm_virtual_network.spoke1_vnet.name
 }
-/*
-resource "azurerm_virtual_network_peering" "spoke1_to_Routablehub" {
-  name                      = "spoke1-to-Routablehub"
-  resource_group_name       = azurerm_resource_group.spoke1_rg.name
-  virtual_network_name      = azurerm_virtual_network.spoke1_vnet.name
-  remote_virtual_network_id = "/subscriptions/dbbf834e-d172-43ce-9e9b-e698443b0ce8/resourceGroups/rhub_rg/providers/Microsoft.Network/virtualNetworks/rhub_vnet"
-  allow_forwarded_traffic   = true
-  allow_gateway_transit     = false
-  use_remote_gateways       = true
-}
-*/
+
 
 resource "azurerm_route_table" "spoke1_EndUSerSubnet_rt" {
   name                = "spoke1_EnduserSubnet_rt"
-  location =              "North Europe"
+  location =              var.cloud_region
   resource_group_name = azurerm_resource_group.spoke1_rg.name
 	disable_bgp_route_propagation = true
 }
@@ -74,7 +64,7 @@ resource "azurerm_subnet_route_table_association" "spoke1_RT_Association" {
 
 resource "azurerm_network_interface" "spoke1_nic1" {
   name                = "spoke1_nic1"
-  location =              "North Europe"
+  location =              var.cloud_region
   resource_group_name = azurerm_resource_group.spoke1_rg.name
 
   ip_configuration {
@@ -87,7 +77,7 @@ resource "azurerm_network_interface" "spoke1_nic1" {
 
 resource "azurerm_network_security_group" "Spoke1-nsg" {
   name                = "Spoke1-nsg"
-  location =              "North Europe"
+  location =              var.cloud_region
   resource_group_name = azurerm_resource_group.spoke1_rg.name
 
 #### Switch to azurerm_network_security_rule per rule ### or use lifecycle block {} ##
@@ -100,7 +90,7 @@ resource "azurerm_network_security_group" "Spoke1-nsg" {
     protocol                   = "Tcp"
     source_port_range          = "*"
     destination_port_range     = "80"
-    source_address_prefixes      = ["10.7.1.0/24", "10.10.0.0/16", "10.11.0.0/16"]
+    source_address_prefixes      = ["10.7.0.0/16", "10.10.0.0/16", "10.11.0.0/16"]
     destination_address_prefix = "*"
   }
 security_rule {
@@ -111,7 +101,7 @@ security_rule {
     protocol                   = "Tcp"
     source_port_range          = "*"
     destination_port_range     = "22"
-    source_address_prefixes      = ["10.7.1.0/24", "10.10.0.0/16", "10.11.0.0/16"]
+    source_address_prefixes      = ["10.7.0.0/16", "10.10.0.0/16", "10.11.0.0/16"]
     destination_address_prefix = "*"
   }
 security_rule {
@@ -122,7 +112,7 @@ security_rule {
     protocol                   = "Icmp"
     source_port_range          = "*"
     destination_port_range     = "*"
-    source_address_prefixes      = ["10.7.1.0/24", "10.10.0.0/16", "10.11.0.0/16"]
+    source_address_prefixes      = ["10.7.0.0/16", "10.10.0.0/16", "10.11.0.0/16"]
     destination_address_prefix = "*"
   }
 
@@ -136,7 +126,7 @@ resource "azurerm_network_interface_security_group_association" "spoke1_NIC_Asso
 
 resource "azurerm_virtual_machine" "spoke1_user_vm" {
   name                  = "spoke1_user_vm"
-  location =              "North Europe"
+  location =              var.cloud_region
   resource_group_name = azurerm_resource_group.spoke1_rg.name
   network_interface_ids = [azurerm_network_interface.spoke1_nic1.id]
   vm_size               = "Standard_B1s"
@@ -185,12 +175,12 @@ resource "azurerm_virtual_machine" "spoke1_user_vm" {
 
 resource "azurerm_resource_group" "spoke2_rg" {
   name     = "spoke2_rg"
-  location = "North Europe"
+  location = var.cloud_region
 }
 
 resource "azurerm_virtual_network" "spoke2_vnet" {
   name = "spoke2_vnet"
-  location = "North Europe"
+  location = var.cloud_region
   resource_group_name = azurerm_resource_group.spoke2_rg.name
   address_space = ["10.10.0.0/16"]
 }
@@ -204,7 +194,7 @@ resource "azurerm_subnet" "Spoke2_VM_Subnet" {
 
 resource "azurerm_route_table" "spoke2_EndUSerSubnet_rt" {
   name                = "spoke2_EnduserSubnet_rt"
-  location =              "North Europe"
+  location =              var.cloud_region
   resource_group_name = azurerm_resource_group.spoke2_rg.name
 	disable_bgp_route_propagation = true
 }
@@ -237,7 +227,7 @@ resource "azurerm_virtual_network_peering" "spoke2_to_Routablehub" {
 */
 resource "azurerm_network_security_group" "Spoke2-nsg" {
   name                = "Spoke2-nsg"
-  location =              "North Europe"
+  location =              var.cloud_region
   resource_group_name = azurerm_resource_group.spoke2_rg.name
 
 #### Switch to azurerm_network_security_rule per rule ### or use lifecycle block {} ##
@@ -284,7 +274,7 @@ security_rule {
 
 resource "azurerm_network_interface" "spoke2_nic1" {
   name                = "spoke2_nic1"
-  location =              "North Europe"
+  location =              var.cloud_region
   resource_group_name = azurerm_resource_group.spoke2_rg.name
 	  ip_configuration {
     name                          = "internal"
@@ -303,7 +293,7 @@ resource "azurerm_network_interface_security_group_association" "spoke2_NIC_Asso
 
 resource "azurerm_virtual_machine" "spoke2_user_vm" {
   name                  = "spoke2_user_vm"
-  location =              "North Europe"
+  location =              var.cloud_region
   resource_group_name = azurerm_resource_group.spoke2_rg.name
   network_interface_ids = [azurerm_network_interface.spoke2_nic1.id]
   vm_size               = "Standard_B1s"

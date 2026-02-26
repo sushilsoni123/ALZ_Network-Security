@@ -3,6 +3,10 @@ variable "subscription_id" {
   type        = string
 }
 
+variable "cloud-region" {
+  description = "cloud region"
+  type        = string
+}
 
 variable "vmpassword" {
   description = "Azure subscription ID"
