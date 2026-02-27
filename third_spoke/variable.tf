@@ -11,5 +11,6 @@ variable "cloud_region" {
 variable "vmpassword" {
   description = "Azure subscription ID"
   type        = string
+  sensitive = true
 }
 

@@ -42,7 +42,7 @@ resource "azurerm_virtual_network_peering" "spoke3_to_Routablehub" {
   name                      = "spoke3-to-Routablehub"
   resource_group_name       = azurerm_resource_group.spoke3_rg.name
   virtual_network_name      = azurerm_virtual_network.spoke3_vnet.name
-remote_virtual_network_id="/subscriptions/dbbf834e-d172-43ce-9e9b-e698443b0ce8/resourceGroups/rhub_rg/providers/Microsoft.Network/virtualNetworks/rhub_vnet"
+remote_virtual_network_id="/subscriptions/var.subscription_id/resourceGroups/rhub_rg/providers/Microsoft.Network/virtualNetworks/rhub_vnet"
   allow_forwarded_traffic   = true
   allow_gateway_transit     = false
   use_remote_gateways       = true
@@ -104,7 +104,7 @@ resource "azurerm_network_security_group" "Spoke3-nsg" {
     protocol                   = "Tcp"
     source_port_range          = "*"
     destination_port_range     = "80"
-    source_address_prefixes      = ["10.7.1.0/24", "10.10.0.0/16", "10.9.0.0/16"]
+    source_address_prefixes      = ["10.7.0.0/16", "10.10.0.0/16", "10.9.0.0/16"]
     destination_address_prefix = "*"
   }
 security_rule {
@@ -115,7 +115,7 @@ security_rule {
     protocol                   = "Tcp"
     source_port_range          = "*"
     destination_port_range     = "22"
-    source_address_prefixes      = ["10.7.1.0/24", "10.10.0.0/16", "10.9.0.0/16"]
+    source_address_prefixes      = ["10.7.0.0/16", "10.10.0.0/16", "10.9.0.0/16"]
     destination_address_prefix = "*"
   }
 security_rule {
@@ -126,7 +126,7 @@ security_rule {
     protocol                   = "Icmp"
     source_port_range          = "*"
     destination_port_range     = "*"
-    source_address_prefixes      = ["10.7.1.0/24", "10.10.0.0/16", "10.9.0.0/16"]
+    source_address_prefixes      = ["10.7.0.0/16", "10.10.0.0/16", "10.9.0.0/16"]
     destination_address_prefix = "*"
   }
 
@@ -144,7 +144,7 @@ resource "azurerm_virtual_machine" "spoke3_user_vm" {
 	
   boot_diagnostics {
     enabled     = true
-    storage_uri = "https://mymlws8250536251.blob.core.windows.net/"
+    storage_uri = "https://demoterraformvci.blob.core.windows.net/"
   }
 
   storage_os_disk {

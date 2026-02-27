@@ -134,7 +134,7 @@ resource "azurerm_virtual_machine" "spoke1_user_vm" {
 	
  boot_diagnostics {
     enabled     = true
-    storage_uri = "https://mymlws8250536251.blob.core.windows.net/"
+    storage_uri = "https://demoterraformvci.blob.core.windows.net/"
   }
 
 
@@ -243,7 +243,7 @@ resource "azurerm_network_security_group" "Spoke2-nsg" {
     protocol                   = "Tcp"
     source_port_range          = "*"
     destination_port_range     = "80"
-    source_address_prefixes      = ["10.7.1.0/24", "10.9.0.0/16", "10.11.0.0/16"]
+    source_address_prefixes      = ["10.7.0.0/16", "10.9.0.0/16", "10.11.0.0/16"]
     destination_address_prefix = "*"
   }
 security_rule {
@@ -254,7 +254,7 @@ security_rule {
     protocol                   = "Tcp"
     source_port_range          = "*"
     destination_port_range     = "22"
-    source_address_prefixes      = ["10.7.1.0/24", "10.9.0.0/16", "10.11.0.0/16"]
+    source_address_prefixes      = ["10.7.0.0/16", "10.9.0.0/16", "10.11.0.0/16"]
     destination_address_prefix = "*"
   }
 security_rule {
@@ -265,7 +265,7 @@ security_rule {
     protocol                   = "Icmp"
     source_port_range          = "*"
     destination_port_range     = "*"
-    source_address_prefixes      = ["10.7.1.0/24", "10.9.0.0/16", "10.11.0.0/16"]  ###single subnet specified as "10.7.1.0"- or better provide as list(string) if many subs like ["10.7.1.0/24", "10.10.1.0/24"]
+    source_address_prefixes      = ["10.7.0.0/16", "10.9.0.0/16", "10.11.0.0/16"]  ###single subnet specified as "10.7.1.0"- or better provide as list(string) if many subs like ["10.7.0.0/16", "10.10.1.0/24"]
     destination_address_prefix = "*"
   }
 
@@ -302,7 +302,7 @@ resource "azurerm_virtual_machine" "spoke2_user_vm" {
 	
  boot_diagnostics {
     enabled     = true
-    storage_uri = "https://mymlws8250536251.blob.core.windows.net/"
+    storage_uri = "https://demoterraformvci.blob.core.windows.net/"
   }
 
   storage_os_disk {
