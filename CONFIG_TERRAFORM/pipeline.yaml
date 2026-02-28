@@ -1,13 +1,13 @@
 trigger: none
 pr: none
 
-  
+
 parameters:
 - name: tfWorkingDir
-  displayName: "Select Terraform folder (relative to repo root)"
+  displayName: "Terraform folder (relative to repo root)"
   type: string
-  default: "DEMO_TERRAFORM_II"
-  # Optional dropdown restriction:
+  default: "dc_rhub_config"
+>>>>>>> 6a07881c1a9cf8be670de5ef7e0317e82e57dbf6
   values:
   - "dc_rhub_config"
   - "fw_rules_config"
