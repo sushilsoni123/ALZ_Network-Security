@@ -27,14 +27,14 @@ stages:
         ARM_USE_OIDC: "true"
         ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
         ARM_TENANT_ID: $(ARM_TENANT_ID)
-# can use env: for subcription and tenant id as well if set in pipeline's variable section like in above lines.
+        # can use env: for subcription and tenant id as well if set in pipeline's variable section like in above lines.
       inputs:
         azureSubscription: "sc-techutsav-001"     # <- service connection
         scriptType: bash
         scriptLocation: inlineScript
         inlineScript: |
           set -euo pipefail
- # Export subscription/tenant explicitly (safe & clean- fetches dynamically, if not set as pipeline variable)
+          # Export subscription/tenant explicitly (safe & clean- fetches dynamically, if not set as pipeline variable)
           # export ARM_SUBSCRIPTION_ID=$(az account show --query id -o tsv)
           # export ARM_TENANT_ID=$(az account show --query tenantId -o tsv)
           echo "Install Terraform ${TF_VERSION}"
@@ -43,11 +43,11 @@ stages:
           terraform -version
           cd "$(WORKING_DIR)"
           echo "Terraform init"
-          terraform init
+          terraform init -input=false
           echo "Validate"
           terraform fmt -check -recursive
           terraform validate
-         echo "Plan (binary + readable)"
+          echo "Plan (binary + readable)"
           terraform plan -input=false -no-color -out=tfplan.binary
           terraform show -no-color tfplan.binary > tfplan.txt
           echo "Plan preview (first 200 lines)"
@@ -105,7 +105,7 @@ stages:
                 terraform -version
                 cd "$(WORKING_DIR)"
                 echo "Terraform init"
-                terraform init
+                terraform init -input=false
                 echo "Copy reviewed plan"
                 cp -v "$(Pipeline.Workspace)/tfplan/tfplan.binary" ./tfplan.binary
                 echo "Apply exact plan"
@@ -144,6 +144,6 @@ stages:
                 terraform -version
                 cd "$(WORKING_DIR)"
                 echo "Terraform init"
-                terraform init
+                terraform init -input=false
                 echo "Destroy"
                 terraform destroy -input=false -auto-approve
