@@ -7,6 +7,20 @@ parameters:
   displayName: "Terraform folder (relative to repo root)"
   type: string
   default: "CONFIG_TERRAFORM"
+  
+parameters:
+- name: tfWorkingDir
+  displayName: "Select Terraform folder (relative to repo root)"
+  type: string
+  default: "DEMO_TERRAFORM_II"
+  # Optional dropdown restriction:
+  values:
+  - "dc_rhub_config"
+  - "fw_rules_config"
+  - "peering_routes_config"
+  - "spokes_config"
+  - "third_spoke"
+
 
 variables:
   TF_VERSION: "1.6.6"
