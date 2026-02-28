@@ -147,7 +147,6 @@ stages:
               scriptLocation: inlineScript
               inlineScript: |
                 set -euo pipefail
-
                 echo "Install Terraform ${TF_VERSION}"
                 curl -sSLo /tmp/terraform.zip "https://releases.hashicorp.com/terraform/${TF_VERSION}/terraform_${TF_VERSION}_linux_amd64.zip"
                 sudo unzip -o /tmp/terraform.zip -d /usr/local/bin
@@ -157,3 +156,4 @@ stages:
                 terraform init
                 echo "Destroy"
                 terraform destroy -input=false -auto-approve
+``
