@@ -24,7 +24,7 @@ stages:
         TF_VAR_vmpassword: $(TF_VAR_vmpassword)
         TF_VAR_bgp_keyword: $(TF_VAR_bgp_keyword)
       inputs:
-        azureSubscription: "SC-AZURE-PROD"     # <- service connection
+        azureSubscription: "sc-techutsav-001"     # <- service connection
         scriptType: bash
         scriptLocation: inlineScript
         inlineScript: |
@@ -91,7 +91,7 @@ stages:
               TF_VAR_vmpassword: $(TF_VAR_vmpassword)
               TF_VAR_bgp_keyword: $(TF_VAR_bgp_keyword)
             inputs:
-              azureSubscription: "SC-AZURE-PROD"
+              azureSubscription: "sc-techutsav-001"
               scriptType: bash
               scriptLocation: inlineScript
               inlineScript: |
@@ -135,7 +135,7 @@ stages:
           - task: AzureCLI@2
             displayName: "Terraform Destroy"
             inputs:
-              azureSubscription: "SC-AZURE-PROD"
+              azureSubscription: "sc-techutsav-001"
               scriptType: bash
               scriptLocation: inlineScript
               inlineScript: |
