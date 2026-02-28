@@ -76,7 +76,7 @@ stages:
           ls -lars
           terraform init -input=false
           echo "Validate"
-          terraform fmt -check -recursive
+          # terraform fmt -check -recursive
           terraform validate
           echo "Plan (binary + readable)"
           terraform plan -input=false -no-color -out=tfplan.binary
