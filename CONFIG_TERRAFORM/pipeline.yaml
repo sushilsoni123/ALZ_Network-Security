@@ -55,10 +55,12 @@ stages:
           curl -sSLo /tmp/terraform.zip "https://releases.hashicorp.com/terraform/${TF_VERSION}/terraform_${TF_VERSION}_linux_amd64.zip"
           sudo unzip -o /tmp/terraform.zip -d /usr/local/bin
           terraform -version
+          echo "landing SourcesDirectory"
           pwd
           ls -la
           TARGET_DIR="$(Build.SourcesDirectory)/$(WORKING_DIR)/${{ parameters.tfWorkingDir }}"
           cd "$(TARGET_DIR)"
+          echo "printing target directory"
           echo "Terraform init"
           pwd
           ls -lars
