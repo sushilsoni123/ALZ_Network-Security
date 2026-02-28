@@ -59,8 +59,11 @@ stages:
           export ARM_TENANT_ID="${tenantId}"
           export ARM_SUBSCRIPTION_ID="$(az account show --query id -o tsv)"
           export ARM_OIDC_TOKEN="${idToken}"
+          echo "$ARM_CLIENT_ID"
+          echo "$ARM_TENANT_ID"
+          echo "$ARM_SUBSCRIPTION_ID"
 
-
+          
           echo "Install Terraform ${TF_VERSION}"
           curl -sSLo /tmp/terraform.zip "https://releases.hashicorp.com/terraform/${TF_VERSION}/terraform_${TF_VERSION}_linux_amd64.zip"
           sudo unzip -o /tmp/terraform.zip -d /usr/local/bin
@@ -136,7 +139,7 @@ stages:
                 sudo unzip -o /tmp/terraform.zip -d /usr/local/bin
                 terraform -version
                 TARGET_DIR="$(Build.SourcesDirectory)/$(WORKING_DIR)/${{ parameters.tfWorkingDir }}"
-                cd "$(TARGET_DIR)"
+                cd "$TARGET_DIR"
                 echo "Terraform init"
                 terraform init -input=false
                 echo "Copy reviewed plan"
