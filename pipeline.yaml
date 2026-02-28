@@ -20,6 +20,9 @@ stages:
 
     - task: AzureCLI@2
       displayName: "Terraform Plan (via AzureCLI login)"
+      env: 
+        TF_VAR_vmpassword: $(TF_VAR_vmpassword)
+        TF_VAR_bgp_keyword: $(TF_VAR_bgp_keyword)
       inputs:
         azureSubscription: "SC-AZURE-PROD"     # <- service connection
         scriptType: bash
@@ -84,6 +87,9 @@ stages:
 
           - task: AzureCLI@2
             displayName: "Terraform Apply (use reviewed plan)"
+            env: 
+              TF_VAR_vmpassword: $(TF_VAR_vmpassword)
+              TF_VAR_bgp_keyword: $(TF_VAR_bgp_keyword)
             inputs:
               azureSubscription: "SC-AZURE-PROD"
               scriptType: bash
