@@ -1,12 +1,6 @@
 trigger: none
 pr: none
 
-
-parameters:
-- name: tfWorkingDir
-  displayName: "Terraform folder (relative to repo root)"
-  type: string
-  default: "CONFIG_TERRAFORM"
   
 parameters:
 - name: tfWorkingDir
@@ -62,8 +56,8 @@ stages:
           curl -sSLo /tmp/terraform.zip "https://releases.hashicorp.com/terraform/${TF_VERSION}/terraform_${TF_VERSION}_linux_amd64.zip"
           sudo unzip -o /tmp/terraform.zip -d /usr/local/bin
           terraform -version
-          TARGET_DIR="$(Build.SourcesDirectory)/${{ parameters.tfWorkingDir }}"
-          cd "$(tfWorkingDir)"
+          TARGET_DIR="$(Build.SourcesDirectory)/$(WORKING_DIR)/${{ parameters.tfWorkingDir }}"
+          cd "$(TARGET_DIR)"
           echo "Terraform init"
           terraform init -input=false
           echo "Validate"
@@ -77,8 +71,8 @@ stages:
 
     - bash: |
         set -euo pipefail
-        TARGET_DIR="$(Build.SourcesDirectory)/${{ parameters.tfWorkingDir }}"
-        cd "$(tfWorkingDir)"
+        TARGET_DIR="$(Build.SourcesDirectory)/$(WORKING_DIR)/${{ parameters.tfWorkingDir }}"
+        cd "$(TARGET_DIR)"
         mkdir -p "$(Build.ArtifactStagingDirectory)/tfplan"
         cp -v tfplan.binary "$(Build.ArtifactStagingDirectory)/tfplan/"
         cp -v tfplan.txt "$(Build.ArtifactStagingDirectory)/tfplan/"
@@ -126,8 +120,8 @@ stages:
                 curl -sSLo /tmp/terraform.zip "https://releases.hashicorp.com/terraform/${TF_VERSION}/terraform_${TF_VERSION}_linux_amd64.zip"
                 sudo unzip -o /tmp/terraform.zip -d /usr/local/bin
                 terraform -version
-                TARGET_DIR="$(Build.SourcesDirectory)/${{ parameters.tfWorkingDir }}"
-                cd "$(tfWorkingDir)"
+                TARGET_DIR="$(Build.SourcesDirectory)/$(WORKING_DIR)/${{ parameters.tfWorkingDir }}"
+                cd "$(TARGET_DIR)"
                 echo "Terraform init"
                 terraform init -input=false
                 echo "Copy reviewed plan"
@@ -166,8 +160,8 @@ stages:
                 curl -sSLo /tmp/terraform.zip "https://releases.hashicorp.com/terraform/${TF_VERSION}/terraform_${TF_VERSION}_linux_amd64.zip"
                 sudo unzip -o /tmp/terraform.zip -d /usr/local/bin
                 terraform -version
-                TARGET_DIR="$(Build.SourcesDirectory)/${{ parameters.tfWorkingDir }}"
-                cd "$(tfWorkingDir)"
+                TARGET_DIR="$(Build.SourcesDirectory)/$(WORKING_DIR)/${{ parameters.tfWorkingDir }}"
+                cd "$(TARGET_DIR)"
                 echo "Terraform init"
                 terraform init -input=false
                 echo "Destroy"
