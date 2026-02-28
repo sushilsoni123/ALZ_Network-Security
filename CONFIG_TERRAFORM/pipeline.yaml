@@ -59,10 +59,10 @@ stages:
           pwd
           ls -la
           TARGET_DIR="$(Build.SourcesDirectory)/$(WORKING_DIR)/${{ parameters.tfWorkingDir }}"
-          cd "$(TARGET_DIR)"
-          echo "printing target directory"
-          echo "Terraform init"
+          echo "printing target directory TARGET_DIR=$TARGET_DIR"
+          cd "$TARGET_DIR"
           pwd
+          echo "Terraform init"
           ls -lars
           terraform init -input=false
           echo "Validate"
