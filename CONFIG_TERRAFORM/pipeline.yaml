@@ -61,7 +61,7 @@ stages:
           export ARM_OIDC_TOKEN="${idToken}"
           echo "this client id- ${ARM_CLIENT_ID}"
           echo "this is tenant id- ${ARM_TENANT_ID}"
-          echo "$this is subscription id- ${ARM_SUBSCRIPTION_ID}"
+          echo "this is subscription id- ${ARM_SUBSCRIPTION_ID}"
 
           
           echo "Install Terraform ${TF_VERSION}"
