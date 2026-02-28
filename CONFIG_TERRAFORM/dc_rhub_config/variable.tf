@@ -24,11 +24,11 @@ variable "dc_region" {
   type        = string
 }
 
-variable "keyword" {
-  description = "Sensitive keyword/secret (do not print)"
-  type        = string
-  sensitive   = true
-}
+# variable "keyword" {
+#   description = "Sensitive keyword/secret (do not print)"
+#   type        = string
+#   sensitive   = true
+# }
 
 variable "tag" {
   description = "Tag value (or environment tag). Consider map(string) if you need multiple tags."
