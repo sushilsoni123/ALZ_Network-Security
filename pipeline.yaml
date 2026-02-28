@@ -25,8 +25,8 @@ stages:
         TF_VAR_bgp_keyword: $(TF_VAR_bgp_keyword) #set as pipeline variables.
         ARM_USE_AZUREAD: "true"
         ARM_USE_OIDC: "true"
-        # ARM_SUBSCRIPTION_ID: ""
-        # ARM_TENANT_ID: ""
+        ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
+        ARM_TENANT_ID: $(ARM_TENANT_ID)
 # can use env: for subcription and tenant id as well if set in pipeline's variable section like in above lines.
       inputs:
         azureSubscription: "sc-techutsav-001"     # <- service connection
@@ -35,8 +35,8 @@ stages:
         inlineScript: |
           set -euo pipefail
  # Export subscription/tenant explicitly (safe & clean- fetches dynamically, if not set as pipeline variable)
-          export ARM_SUBSCRIPTION_ID=$(az account show --query id -o tsv)
-          export ARM_TENANT_ID=$(az account show --query tenantId -o tsv)
+          # export ARM_SUBSCRIPTION_ID=$(az account show --query id -o tsv)
+          # export ARM_TENANT_ID=$(az account show --query tenantId -o tsv)
           echo "Install Terraform ${TF_VERSION}"
           curl -sSLo /tmp/terraform.zip "https://releases.hashicorp.com/terraform/${TF_VERSION}/terraform_${TF_VERSION}_linux_amd64.zip"
           sudo unzip -o /tmp/terraform.zip -d /usr/local/bin
