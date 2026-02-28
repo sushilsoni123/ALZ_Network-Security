@@ -21,8 +21,8 @@ stages:
     - task: AzureCLI@2
       displayName: "Terraform Plan (via AzureCLI login)"
       env: 
-        TF_VAR_vmpassword: $(TF_VAR_vmpassword)
-        TF_VAR_bgp_keyword: $(TF_VAR_bgp_keyword)
+        TF_VAR_vmpassword: $(TF_VAR_vmpassword) #set as pipeline variables.
+        TF_VAR_bgp_keyword: $(TF_VAR_bgp_keyword) #set as pipeline variables.
         ARM_USE_AZUREAD: "true"
         ARM_USE_OIDC: "true"
         # ARM_SUBSCRIPTION_ID: ""
@@ -41,20 +41,15 @@ stages:
           curl -sSLo /tmp/terraform.zip "https://releases.hashicorp.com/terraform/${TF_VERSION}/terraform_${TF_VERSION}_linux_amd64.zip"
           sudo unzip -o /tmp/terraform.zip -d /usr/local/bin
           terraform -version
-
           cd "$(WORKING_DIR)"
-
           echo "Terraform init"
           terraform init
-
           echo "Validate"
           terraform fmt -check -recursive
           terraform validate
-
-          echo "Plan (binary + readable)"
+         echo "Plan (binary + readable)"
           terraform plan -input=false -no-color -out=tfplan.binary
           terraform show -no-color tfplan.binary > tfplan.txt
-
           echo "Plan preview (first 200 lines)"
           sed -n '1,200p' tfplan.txt
 
@@ -108,15 +103,11 @@ stages:
                 curl -sSLo /tmp/terraform.zip "https://releases.hashicorp.com/terraform/${TF_VERSION}/terraform_${TF_VERSION}_linux_amd64.zip"
                 sudo unzip -o /tmp/terraform.zip -d /usr/local/bin
                 terraform -version
-
                 cd "$(WORKING_DIR)"
-
                 echo "Terraform init"
                 terraform init
-
                 echo "Copy reviewed plan"
                 cp -v "$(Pipeline.Workspace)/tfplan/tfplan.binary" ./tfplan.binary
-
                 echo "Apply exact plan"
                 terraform apply -input=false -auto-approve tfplan.binary
 
@@ -156,4 +147,3 @@ stages:
                 terraform init
                 echo "Destroy"
                 terraform destroy -input=false -auto-approve
-``
