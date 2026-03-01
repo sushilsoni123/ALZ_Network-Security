@@ -101,7 +101,7 @@ resource "azurerm_firewall_policy_rule_collection_group" "rule_collection_group"
       protocols             = ["TCP"]
     }
 
-####spoke2 to spoke3
+####spoke1 to spoke3
 /*
 		rule {
       name       = "inc-7"
