@@ -125,7 +125,7 @@ resource "azurerm_virtual_network_peering" "Opco1spoke2_to_Routablehub" {
 }
 
 ############################### SPOKE3 Details
-
+/*
 data "azurerm_resource_group" "spoke3_rg" {
   name = "spoke3_rg"
 }
@@ -134,7 +134,7 @@ data "azurerm_virtual_network" "spoke3_vnet" {
   resource_group_name = "spoke3_rg"
 }
 #peering to spoke3
-/*
+
 resource "azurerm_virtual_network_peering" "Opco1spoke3_to_Routablehub" {
   name                      = "Opco1spoke3_to_Routablehub"
   resource_group_name       = data.azurerm_resource_group.spoke3_rg.name
