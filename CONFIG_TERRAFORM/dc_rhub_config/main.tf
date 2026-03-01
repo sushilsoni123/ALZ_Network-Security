@@ -2,7 +2,7 @@ terraform {
   required_providers {
     azurerm = {
       source = "hashicorp/azurerm"
-      version = "3.4.0"
+      version = ">= 3.80.0"
     }
   }
    backend "azurerm" {
@@ -16,7 +16,8 @@ terraform {
 provider "azurerm" {
   # Configuration options
   features {}
- subscription_id = var.subscription_id     # subscription id where actual config to be done.
+  subscription_id = var.subscription_id     # subscription id where actual config to be done.
+  # use-oidc=true
 }
 
 
