@@ -44,7 +44,7 @@ resource "azurerm_virtual_network_peering" "Routablehub_to_Opco1spoke1" {
   name                      = "Routablehub-to-Opco1spoke1"
   resource_group_name       = data.azurerm_resource_group.rhub_rg.name
   virtual_network_name      = data.azurerm_virtual_network.rhub_vnet.name
-  remote_virtual_network_id = "/subscriptions/var.subscription_id/resourceGroups/spoke1_rg/providers/Microsoft.Network/virtualNetworks/spoke1_vnet"
+  remote_virtual_network_id = "/subscriptions/dbbf834e-d172-43ce-9e9b-e698443b0ce8/resourceGroups/spoke1_rg/providers/Microsoft.Network/virtualNetworks/spoke1_vnet"
   allow_forwarded_traffic   = true
   allow_gateway_transit     = true
   use_remote_gateways       = false
@@ -54,7 +54,7 @@ resource "azurerm_virtual_network_peering" "Routablehub_to_Opco1spoke2" {
   name                      = "Routablehub-to-Opco1spoke2"
   resource_group_name       = data.azurerm_resource_group.rhub_rg.name
   virtual_network_name      = data.azurerm_virtual_network.rhub_vnet.name
-  remote_virtual_network_id = "/subscriptions/var.susbcription_id/resourceGroups/spoke2_rg/providers/Microsoft.Network/virtualNetworks/spoke2_vnet"
+  remote_virtual_network_id = "/subscriptions/dbbf834e-d172-43ce-9e9b-e698443b0ce8/resourceGroups/spoke2_rg/providers/Microsoft.Network/virtualNetworks/spoke2_vnet"
   allow_forwarded_traffic   = true
   allow_gateway_transit     = true
   use_remote_gateways       = false
@@ -64,7 +64,7 @@ resource "azurerm_virtual_network_peering" "Routablehub_to_Opco1spoke3" {
   name                      = "Routablehub_to_Opco1spoke3"
   resource_group_name       = data.azurerm_resource_group.rhub_rg.name
   virtual_network_name      = data.azurerm_virtual_network.rhub_vnet.name
-  remote_virtual_network_id = "/subscriptions/var.subscription_id/resourceGroups/spoke3_rg/providers/Microsoft.Network/virtualNetworks/spoke3_vnet"
+  remote_virtual_network_id = "/subscriptions/dbbf834e-d172-43ce-9e9b-e698443b0ce8/resourceGroups/spoke3_rg/providers/Microsoft.Network/virtualNetworks/spoke3_vnet"
   allow_forwarded_traffic   = true
   allow_gateway_transit     = true
   use_remote_gateways       = false
@@ -88,7 +88,7 @@ resource "azurerm_virtual_network_peering" "Opco1spoke1_to_Routablehub" {
   name                      = "Opco1spoke1_to_Routablehub"
   resource_group_name       = data.azurerm_resource_group.spoke1_rg.name
   virtual_network_name      = data.azurerm_virtual_network.spoke1_vnet.name
-  remote_virtual_network_id = "/subscriptions/var.subscription_id/resourceGroups/rhub_rg/providers/Microsoft.Network/virtualNetworks/rhub_vnet"
+  remote_virtual_network_id = "/subscriptions/dbbf834e-d172-43ce-9e9b-e698443b0ce8/resourceGroups/rhub_rg/providers/Microsoft.Network/virtualNetworks/rhub_vnet"
   allow_forwarded_traffic   = true
   allow_gateway_transit     = false
   use_remote_gateways       = true
@@ -113,7 +113,7 @@ resource "azurerm_virtual_network_peering" "Opco1spoke2_to_Routablehub" {
   name                      = "Opco1spoke2_to_Routablehub"
   resource_group_name       = data.azurerm_resource_group.spoke2_rg.name
   virtual_network_name      = data.azurerm_virtual_network.spoke2_vnet.name
-  remote_virtual_network_id = "/subscriptions/var.subscription_id/resourceGroups/rhub_rg/providers/Microsoft.Network/virtualNetworks/rhub_vnet"
+  remote_virtual_network_id = "/subscriptions/dbbf834e-d172-43ce-9e9b-e698443b0ce8/resourceGroups/rhub_rg/providers/Microsoft.Network/virtualNetworks/rhub_vnet"
   allow_forwarded_traffic   = true
   allow_gateway_transit     = false
   use_remote_gateways       = true
@@ -139,7 +139,7 @@ resource "azurerm_virtual_network_peering" "Opco1spoke3_to_Routablehub" {
   name                      = "Opco1spoke3_to_Routablehub"
   resource_group_name       = data.azurerm_resource_group.spoke3_rg.name
   virtual_network_name      = data.azurerm_virtual_network.spoke3_vnet.name
-  remote_virtual_network_id = "/subscriptions/var.subscription_id/resourceGroups/rhub_rg/providers/Microsoft.Network/virtualNetworks/rhub_vnet"
+  remote_virtual_network_id = "/subscriptions/dbbf834e-d172-43ce-9e9b-e698443b0ce8/resourceGroups/rhub_rg/providers/Microsoft.Network/virtualNetworks/rhub_vnet"
   allow_forwarded_traffic   = true
   allow_gateway_transit     = false
   use_remote_gateways       = true
