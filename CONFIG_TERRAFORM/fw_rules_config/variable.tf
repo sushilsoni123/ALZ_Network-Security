@@ -3,17 +3,9 @@ variable "subscription_id" {
   type        = string
 }
 
-variable "dc_rg_name" {
-  description = "Resource group name"
-  type        = string
-}
 
 variable "FirewallPolicy"{
 description = "firewall policy name"
 type = string
 
-}
-variable "cloud_region" {
-  description = "Azure region (e.g., centralindia)"
-  type        = string
 }

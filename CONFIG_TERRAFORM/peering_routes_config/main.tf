@@ -59,7 +59,7 @@ resource "azurerm_virtual_network_peering" "Routablehub_to_Opco1spoke2" {
   allow_gateway_transit     = true
   use_remote_gateways       = false
 }
-
+/*
 resource "azurerm_virtual_network_peering" "Routablehub_to_Opco1spoke3" {
   name                      = "Routablehub_to_Opco1spoke3"
   resource_group_name       = data.azurerm_resource_group.rhub_rg.name
@@ -69,7 +69,7 @@ resource "azurerm_virtual_network_peering" "Routablehub_to_Opco1spoke3" {
   allow_gateway_transit     = true
   use_remote_gateways       = false
 }
-
+*/
 #############################################
 ###### FROM SPOKES TO ROUTABLEHUB ###########
 #############################################
@@ -134,6 +134,7 @@ data "azurerm_virtual_network" "spoke3_vnet" {
   resource_group_name = "spoke3_rg"
 }
 #peering to spoke3
+/*
 resource "azurerm_virtual_network_peering" "Opco1spoke3_to_Routablehub" {
   name                      = "Opco1spoke3_to_Routablehub"
   resource_group_name       = data.azurerm_resource_group.spoke3_rg.name
@@ -148,7 +149,7 @@ resource "azurerm_virtual_network_peering" "Opco1spoke3_to_Routablehub" {
   ]
 
 }
-
+*/
 ###############################################################
 ################# ROUTE ADDITION TO SPOKES ###################
 ##############################################################
@@ -179,7 +180,7 @@ resource "azurerm_route" "for_spoke2_subnet1" {
   next_hop_in_ip_address = "10.5.6.4"  
   # Internal IP of Azure Firewall
 }
-
+/*
 resource "azurerm_route" "for_spoke3_subnet1" {
   name                   = "for_spoke3_subnet1"
   resource_group_name       = data.azurerm_resource_group.rhub_rg.name
@@ -189,3 +190,4 @@ resource "azurerm_route" "for_spoke3_subnet1" {
   next_hop_in_ip_address = "10.5.6.4"  
   # Internal IP of Azure Firewall
 }
+*/

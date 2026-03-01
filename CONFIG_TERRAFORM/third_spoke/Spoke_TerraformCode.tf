@@ -37,17 +37,7 @@ resource "azurerm_subnet" "spoke3_vm_subnet" {
   virtual_network_name = azurerm_virtual_network.spoke3_vnet.name
 }
 
-/*
-resource "azurerm_virtual_network_peering" "spoke3_to_Routablehub" {
-  name                      = "spoke3-to-Routablehub"
-  resource_group_name       = azurerm_resource_group.spoke3_rg.name
-  virtual_network_name      = azurerm_virtual_network.spoke3_vnet.name
-remote_virtual_network_id="/subscriptions/var.subscription_id/resourceGroups/rhub_rg/providers/Microsoft.Network/virtualNetworks/rhub_vnet"
-  allow_forwarded_traffic   = true
-  allow_gateway_transit     = false
-  use_remote_gateways       = true
-}
-*/
+
 resource "azurerm_route_table" "spoke3_EndUSerSubnet_rt" {
   name                = "spoke3_EnduserSubnet_rt"
   location =              "North Europe"
