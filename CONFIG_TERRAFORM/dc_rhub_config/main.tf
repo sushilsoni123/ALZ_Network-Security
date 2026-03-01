@@ -428,6 +428,11 @@ resource "azurerm_firewall" "firewall" {
     subnet_id            = azurerm_subnet.firewall_subnet.id
     public_ip_address_id = azurerm_public_ip.firewall_pip.id
   }
+  timeouts {
+    create = "90m"
+    update = "90m"
+    delete = "90m"
+  }
   firewall_policy_id = azurerm_firewall_policy.firewall_policy.id
 }
 
@@ -437,9 +442,15 @@ resource "azurerm_route_table" "gatewaysubnet_rt" {
   name                = "gatewaysubnet_rt"
   location =              var.rhub_region
   resource_group_name       = azurerm_resource_group.rhub_rg.name
+  depends_on = [azurerm_firewall.firewall]
 }
 
 resource "azurerm_subnet_route_table_association" "RT_Association" {
   subnet_id      = azurerm_subnet.rhub_gateway_subnet.id
   route_table_id = azurerm_route_table.gatewaysubnet_rt.id
+  depends_on = [azurerm_firewall.firewall]
+  timeouts {
+    create = "90m" 
+    delete = "90m"
+  }
 }
