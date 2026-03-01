@@ -42,7 +42,7 @@ resource "azurerm_route_table" "spoke1_EndUSerSubnet_rt" {
   name                = "spoke1_EnduserSubnet_rt"
   location =              var.cloud_region
   resource_group_name = azurerm_resource_group.spoke1_rg.name
-	disable_bgp_route_propagation = true
+	bgp_route_propagation_enabled = false
 }
 resource "azurerm_route" "default_spoke1" {
   name                   = "default_spoke1"
@@ -196,7 +196,7 @@ resource "azurerm_route_table" "spoke2_EndUSerSubnet_rt" {
   name                = "spoke2_EnduserSubnet_rt"
   location =              var.cloud_region
   resource_group_name = azurerm_resource_group.spoke2_rg.name
-	disable_bgp_route_propagation = true
+	bgp_route_propagation_enabled = false
 }
 
 resource "azurerm_route" "default_spoke2" {

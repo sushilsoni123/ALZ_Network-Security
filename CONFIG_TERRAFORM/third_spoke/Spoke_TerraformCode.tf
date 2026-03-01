@@ -52,7 +52,7 @@ resource "azurerm_route_table" "spoke3_EndUSerSubnet_rt" {
   name                = "spoke3_EnduserSubnet_rt"
   location =              "North Europe"
   resource_group_name = azurerm_resource_group.spoke3_rg.name
-	disable_bgp_route_propagation = true
+	bgp_route_propagation_enabled = false
 }
 resource "azurerm_route" "default_spoke3" {
   name                   = "default_spoke3"
