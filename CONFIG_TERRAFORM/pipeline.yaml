@@ -90,7 +90,7 @@ stages:
     - bash: |
         set -euo pipefail
         TARGET_DIR="$(Build.SourcesDirectory)/$(WORKING_DIR)/${{ parameters.tfWorkingDir }}"
-        cd "$(TARGET_DIR)"
+        cd "$TARGET_DIR"
         mkdir -p "$(Build.ArtifactStagingDirectory)/tfplan"
         cp -v tfplan.binary "$(Build.ArtifactStagingDirectory)/tfplan/"
         cp -v tfplan.txt "$(Build.ArtifactStagingDirectory)/tfplan/"
