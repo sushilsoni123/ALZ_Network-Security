@@ -102,7 +102,7 @@ resource "azurerm_firewall_policy_rule_collection_group" "rule_collection_group"
     }
 
 ####spoke1 to spoke3
-/*
+
 	rule {
       name       = "inc-7"
       source_addresses = ["10.9.0.0/16"]
