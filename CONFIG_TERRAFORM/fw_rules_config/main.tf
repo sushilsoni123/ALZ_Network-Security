@@ -79,7 +79,7 @@ resource "azurerm_firewall_policy_rule_collection_group" "rule_collection_group"
 
 ###dc to spoke2
 
-		rule {
+	rule {
       name       = "inc-4"
       source_addresses = ["10.7.0.0/16"]
       destination_addresses = ["10.10.0.0/16"]
@@ -93,7 +93,7 @@ resource "azurerm_firewall_policy_rule_collection_group" "rule_collection_group"
       destination_ports     = ["80"]
       protocols             = ["TCP"]
     }
-		rule {
+	rule {
       name                  = "inc-6"
       source_addresses      = ["10.7.0.0/16"]
       destination_addresses = ["10.10.0.0/16"]
@@ -103,7 +103,7 @@ resource "azurerm_firewall_policy_rule_collection_group" "rule_collection_group"
 
 ####spoke1 to spoke3
 
-		rule {
+	rule {
       name       = "inc-7"
       source_addresses = ["10.9.0.0/16"]
       destination_addresses = ["10.11.0.0/16"]
@@ -127,7 +127,7 @@ resource "azurerm_firewall_policy_rule_collection_group" "rule_collection_group"
 
 
 ###dc to spoke3
-
+/*
 		rule {
       name       = "inc-10"
       source_addresses = ["10.7.0.0/16"]
@@ -149,7 +149,7 @@ resource "azurerm_firewall_policy_rule_collection_group" "rule_collection_group"
       destination_ports     = ["22"]
       protocols             = ["TCP"]
     }
-
+*/
   }
 }
 
