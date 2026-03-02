@@ -127,7 +127,7 @@ resource "azurerm_firewall_policy_rule_collection_group" "rule_collection_group"
 
 
 ###dc to spoke3
-/*
+
 		rule {
       name       = "inc-10"
       source_addresses = ["10.7.0.0/16"]
@@ -149,7 +149,6 @@ resource "azurerm_firewall_policy_rule_collection_group" "rule_collection_group"
       destination_ports     = ["22"]
       protocols             = ["TCP"]
     }
-*/
   }
 }
 
