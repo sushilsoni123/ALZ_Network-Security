@@ -181,7 +181,7 @@ resource "azurerm_route" "for_spoke2_subnet1" {
   next_hop_in_ip_address = "10.5.6.4"  
   # Internal IP of Azure Firewall
 }
-
+/*
 resource "azurerm_route" "for_spoke3_subnet1" {
   name                   = "for_spoke3_subnet1"
   resource_group_name       = data.azurerm_resource_group.rhub_rg.name
@@ -191,3 +191,4 @@ resource "azurerm_route" "for_spoke3_subnet1" {
   next_hop_in_ip_address = "10.5.6.4"  
   # Internal IP of Azure Firewall
 }
+*/
