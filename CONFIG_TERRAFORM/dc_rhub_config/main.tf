@@ -245,7 +245,7 @@ storage_image_reference {
   os_profile {
     computer_name  = "dc-user-vm"
     admin_username = "adminuser"
-    admin_password = var.vmpassword
+    admin_password = "Password1234!"
     custom_data    = filebase64("${path.module}/cloud-init.txt")
   }
 

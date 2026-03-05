@@ -77,11 +77,11 @@ variable "bgp_keyword" {
   sensitive   = true
 }
 
-variable "vmpassword" {
-  description = "Azure subscription ID"
-  type        = string
-  sensitive = true
-}
+# variable "vmpassword" {
+#   description = "Azure subscription ID"
+#   type        = string
+#   sensitive = true
+# }
 
 #####################################################################
 ###################### Dublin-RHUB #################################
