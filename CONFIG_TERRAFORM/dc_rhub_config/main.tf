@@ -384,6 +384,9 @@ resource "azurerm_virtual_network_gateway_connection" "cedge_tunnel1" {
   type                           = "IPsec"
   shared_key                     = var.bgp_keyword
   enable_bgp                     = true
+  lifecycle {
+    ignore_changes = [tags]
+  }
 }
 
 resource "azurerm_virtual_network_gateway_connection" "cedge-tunnel2" {
@@ -395,6 +398,9 @@ resource "azurerm_virtual_network_gateway_connection" "cedge-tunnel2" {
   type                           = "IPsec"
   shared_key                     = var.bgp_keyword
   enable_bgp                     = true
+  lifecycle {
+    ignore_changes = [tags]
+  }
 }
 
 
