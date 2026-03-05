@@ -62,6 +62,9 @@ resource "azurerm_public_ip" "dc_pip1" {
   allocation_method = "Static" # Static or Dynamic supported [2](https://registry.terraform.io/providers/hashicorp/azurerm/4.60.0/docs/resources/public_ip)
   sku               = "Standard"
 	zones             = ["1", "2", "3"]
+  lifecycle {
+    ignore_changes = [tags]
+  }
 }
 
 resource "azurerm_public_ip" "dc_pip2" {
@@ -71,6 +74,9 @@ resource "azurerm_public_ip" "dc_pip2" {
   allocation_method = "Static" # Static or Dynamic supported [2](https://registry.terraform.io/providers/hashicorp/azurerm/4.60.0/docs/resources/public_ip)
   sku               = "Standard"
 	zones             = ["1", "2", "3"]
+  lifecycle {
+    ignore_changes = [tags]
+  }
 }
 
 
@@ -117,6 +123,9 @@ resource "azurerm_local_network_gateway" "Opco1_lng1" {
     asn             = var.dc_remote_asn
     bgp_peering_address = var.dc_bgp_peer1
   }
+  lifecycle {
+    ignore_changes = [tags]
+  }
 }
 
 resource "azurerm_local_network_gateway" "Opco1_lng2" {
@@ -128,6 +137,9 @@ resource "azurerm_local_network_gateway" "Opco1_lng2" {
   bgp_settings {
     asn             = var.dc_remote_asn
     bgp_peering_address = var.dc_bgp_peer2
+  }
+  lifecycle {
+    ignore_changes = [tags]
   }
 }
 
@@ -177,6 +189,9 @@ resource "azurerm_network_interface" "nic1" {
     name                          = "internal"
     subnet_id                     = azurerm_subnet.dc_vm_subnet.id
     private_ip_address_allocation = "Dynamic"
+  }
+  lifecycle {
+    ignore_changes = [tags]
   }
 }
 
@@ -276,6 +291,7 @@ storage_image_reference {
 resource "azurerm_resource_group" "rhub_rg" {
   name     = var.rhub_rg_name
   location = var.rhub_region
+
 }
 
 ################ Creation of Vnet and Subnets #######################################
@@ -304,6 +320,9 @@ resource "azurerm_public_ip" "rhub_pip1" {
   allocation_method = "Static"
   sku                 = "Standard"
   zones               = ["1", "2", "3"]
+  lifecycle {
+    ignore_changes = [tags]
+  }
 }
 resource "azurerm_public_ip" "rhub_pip2" {
   name                = "rhub_pip2"
@@ -312,6 +331,9 @@ resource "azurerm_public_ip" "rhub_pip2" {
   allocation_method = "Static"
   sku                 = "Standard"
   zones               = ["1", "2", "3"]
+  lifecycle {
+    ignore_changes = [tags]
+  }
  
 }
 
@@ -359,6 +381,9 @@ resource "azurerm_local_network_gateway" "cedge-1" {
     asn             = var.rhub_remote_asn
     bgp_peering_address = var.rhub_bgp_peer1
   }
+  lifecycle {
+    ignore_changes = [tags]
+  }
 }
 
 resource "azurerm_local_network_gateway" "cedge-2" {
@@ -370,6 +395,9 @@ resource "azurerm_local_network_gateway" "cedge-2" {
   bgp_settings {
     asn             = var.rhub_remote_asn
     bgp_peering_address = var.rhub_bgp_peer2
+  }
+  lifecycle {
+    ignore_changes = [tags]
   }
 }
 
@@ -423,6 +451,9 @@ resource "azurerm_public_ip" "firewall_pip" {
   location      = var.rhub_region
   allocation_method   = "Static"
   sku                 = "Standard"
+  lifecycle {
+    ignore_changes = [tags]
+  }
 }
 
 #Define the Firewall Policy:
@@ -430,6 +461,9 @@ resource "azurerm_firewall_policy" "firewall_policy" {
   name                = "FirewallPolicy"
   location            = var.rhub_region
   resource_group_name = azurerm_resource_group.rhub_rg.name
+  lifecycle {
+    ignore_changes = [tags]
+  }
 }
 
 #Create the Azure Firewall:
@@ -450,6 +484,9 @@ resource "azurerm_firewall" "firewall" {
     delete = "90m"
   }
   firewall_policy_id = azurerm_firewall_policy.firewall_policy.id
+  lifecycle {
+    ignore_changes = [tags]
+  }
 }
 
 
