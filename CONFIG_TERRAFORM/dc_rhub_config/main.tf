@@ -217,7 +217,7 @@ resource "azurerm_network_interface_security_group_association" "NIC_Association
   network_interface_id      = azurerm_network_interface.nic1.id
   network_security_group_id = azurerm_network_security_group.dc_vm_nsg.id
 }
-
+/*
 resource "azurerm_virtual_machine" "dc_user_VM" {
   name                  = "dc-user-vm"
   location =              var.dc_region
@@ -255,7 +255,7 @@ storage_image_reference {
 	
 }
 
-
+*/
 
 
 #####################################################################
