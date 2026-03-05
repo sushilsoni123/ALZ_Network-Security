@@ -32,6 +32,9 @@ provider "azurerm" {
 resource "azurerm_resource_group" "dc_rg" {
   name = var.dc_rg_name
   location = var.dc_region
+  lifecycle {
+    ignore_changes = [tags]
+  }
  }
 
 
@@ -41,6 +44,9 @@ resource "azurerm_virtual_network" "dc_vnet" {
   location = var.dc_region
   resource_group_name = azurerm_resource_group.dc_rg.name
   address_space = var.dc_cidr_id
+  lifecycle {
+    ignore_changes = [tags]
+  }
 }
 resource "azurerm_subnet" "dc_vm_subnet" {
   name = "dc_vm_subnet"
@@ -108,6 +114,9 @@ resource "azurerm_virtual_network_gateway" "dc_vng" {
     asn                          = var.dc_local_asn
     peer_weight                  = 0
    
+  }
+  lifecycle {
+    ignore_changes = [tags]
   }
 }
 
@@ -234,7 +243,9 @@ security_rule {
     source_address_prefix      = "*"
     destination_address_prefix = "*"
   }
-
+  lifecycle {
+    ignore_changes = [tags]
+  }
 
 }
 
@@ -291,6 +302,9 @@ storage_image_reference {
 resource "azurerm_resource_group" "rhub_rg" {
   name     = var.rhub_rg_name
   location = var.rhub_region
+  lifecycle {
+    ignore_changes = [tags]
+  }
 
 }
 
@@ -301,6 +315,9 @@ resource "azurerm_virtual_network" "rhub_vnet" {
   location = var.rhub_region
   resource_group_name = azurerm_resource_group.rhub_rg.name
   address_space = ["10.5.0.0/16"]
+  lifecycle {
+    ignore_changes = [tags]
+  }
 }
 
 resource "azurerm_subnet" "rhub_gateway_subnet" {
@@ -366,6 +383,9 @@ resource "azurerm_virtual_network_gateway" "rhub_vng" {
     asn                          = var.rhub_local_asn
     peer_weight                  = 0
     }
+  lifecycle {
+    ignore_changes = [tags]
+  }
 
 }
 
@@ -496,6 +516,9 @@ resource "azurerm_route_table" "gatewaysubnet_rt" {
   location =              var.rhub_region
   resource_group_name       = azurerm_resource_group.rhub_rg.name
   depends_on = [azurerm_firewall.firewall]
+  lifecycle {
+    ignore_changes = [tags]
+  }
 }
 
 resource "azurerm_subnet_route_table_association" "RT_Association" {
