@@ -213,47 +213,47 @@ security_rule {
 
 }
 
-resource "azurerm_network_interface_security_group_association" "NIC_Association" {
-  network_interface_id      = azurerm_network_interface.nic1.id
-  network_security_group_id = azurerm_network_security_group.dc_vm_nsg.id
-}
+# resource "azurerm_network_interface_security_group_association" "NIC_Association" {
+#   network_interface_id      = azurerm_network_interface.nic1.id
+#   network_security_group_id = azurerm_network_security_group.dc_vm_nsg.id
+# }
 
-resource "azurerm_virtual_machine" "dc_user_VM" {
-  name                  = "dc-user-vm"
-  location =              var.dc_region
-  resource_group_name = azurerm_resource_group.dc_rg.name
-  network_interface_ids = [azurerm_network_interface.nic1.id]
-  vm_size               = "Standard_D2s_v3"
-
-
-  storage_os_disk {
-    name              = "os-disk"
-    caching           = "ReadWrite"
-    create_option     = "FromImage"
-    managed_disk_type = "Standard_LRS"
-  }
+# resource "azurerm_virtual_machine" "dc_user_VM" {
+#   name                  = "dc-user-vm"
+#   location =              var.dc_region
+#   resource_group_name = azurerm_resource_group.dc_rg.name
+#   network_interface_ids = [azurerm_network_interface.nic1.id]
+#   vm_size               = "Standard_D2s_v3"
 
 
-storage_image_reference {
-  publisher = "Canonical"
-  offer     = "0001-com-ubuntu-server-jammy"
-  sku       = "22_04-lts-gen2"
-  version   = "latest"
-}
+#   storage_os_disk {
+#     name              = "os-disk"
+#     caching           = "ReadWrite"
+#     create_option     = "FromImage"
+#     managed_disk_type = "Standard_LRS"
+#   }
 
 
-  os_profile {
-    computer_name  = "dc-user-vm"
-    admin_username = "adminuser"
-    admin_password = "Password1234!"
-    custom_data    = filebase64("${path.module}/cloud-init.txt")
-  }
+# storage_image_reference {
+#   publisher = "Canonical"
+#   offer     = "0001-com-ubuntu-server-jammy"
+#   sku       = "22_04-lts-gen2"
+#   version   = "latest"
+# }
 
-  os_profile_linux_config {
-    disable_password_authentication = false
-  }
+
+#   os_profile {
+#     computer_name  = "dc-user-vm"
+#     admin_username = "adminuser"
+#     admin_password = "Password1234!"
+#     custom_data    = filebase64("${path.module}/cloud-init.txt")
+#   }
+
+#   os_profile_linux_config {
+#     disable_password_authentication = false
+#   }
 	
-}
+# }
 
 
 
