@@ -221,7 +221,7 @@ resource "azurerm_network_security_group" "dc_vm_nsg" {
     source_address_prefix      = "*"
     destination_address_prefix = "*"
   }
-security_rule {
+  security_rule {
     name                       = "allow-ssh"
     priority                   = 1002
     direction                  = "Inbound"
@@ -232,7 +232,7 @@ security_rule {
     source_address_prefix      = "*"
     destination_address_prefix = "*"
   }
-security_rule {
+  security_rule {
     name                       = "allow-icmp"
     priority                   = 1003
     direction                  = "Inbound"
