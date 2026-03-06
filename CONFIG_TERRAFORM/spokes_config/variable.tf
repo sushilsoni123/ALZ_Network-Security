@@ -7,9 +7,3 @@ variable "cloud_region" {
   description = "cloud region"
   type        = string
 }
-
-variable "vmpassword" {
-  description = "Azure subscription ID"
-  type        = string
-  sensitive = true
-}
