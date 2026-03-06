@@ -4,9 +4,3 @@ variable "subscription_id" {
 }
 
 
-variable "vmpassword" {
-  description = "Azure subscription ID"
-  type        = string
-  sensitive = true
-}
-
