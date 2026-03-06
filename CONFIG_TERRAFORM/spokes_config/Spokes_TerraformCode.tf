@@ -156,7 +156,7 @@ resource "azurerm_virtual_machine" "spoke1_user_vm" {
   os_profile {
     computer_name  = "spoke1-user-vm"
     admin_username = "adminuser"
-    admin_password = var.vmpassword
+    admin_password = "Password1234!"
     custom_data    = filebase64("${path.module}/cloud-init.txt")
   }
 
@@ -322,7 +322,7 @@ resource "azurerm_virtual_machine" "spoke2_user_vm" {
   os_profile {
     computer_name  = "spoke2-user-vm"
     admin_username = "adminuser"
-    admin_password = var.vmpassword
+    admin_password = "Password1234!"
     custom_data    = filebase64("${path.module}/cloud-init.txt")
   }
 
